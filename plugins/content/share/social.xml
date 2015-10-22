@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="content" method="upgrade">
+	<name>Social Sharing Plugin</name>
+	<author>Teemr</author>
+	<creationDate>21 October 2015</creationDate>
+	<copyright>Copyright (C) 2015 Teemr. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>jasper@teemr.com</authorEmail>
+	<authorUrl>teemr.com</authorUrl>
+	<version>0.0.1</version>
+	<description>A plugin that enables social sharing.</description>
+	<files>
+		<filename plugin="social">social.php</filename>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field type="spacer" label="Basic plugins&lt;hr/&gt;" />
+				<field type="checkbox" label="Enable highlighting" name="enable_highlight" />
+				<field type="checkbox" label="Enable selection" name="enable_selection" />
+
+				<field type="spacer" label="Global settings&lt;hr/&gt;" />
+				<field type="text" label="Popup class name" name="popup_class" default="popup" />
+				<field type="text" label="Popup item elements" name="button_element" default="button" />
+				<field type="text" label="Popup item class" name="share_class" default="share" />
+
+				<field type="spacer" label="Service settings&lt;hr/&gt;" />
+				<field type="checkbox" label="Enable Twitter" name="enable_twitter" />
+				<field type="checkbox" label="Enable Facebook" name="enable_facebook" />
+				<field type="checkbox" label="Enable Pinterest" name="enable_pinterest" />
+				<field type="checkbox" label="Enable Google Plus" name="enable_google_plus" />
+
+				<field type="spacer" label="Highlight settings&lt;hr/&gt;" />
+				<field type="list" label="Hightlight popup location" name="highlight_location" default="">
+					<option>Cursor</option>
+					<option value="top">Top</option>
+					<option value="bottom">Bottom</option>
+					<option value="left">Left</option>
+					<option value="right">Right</option>
+				</field>
+
+				<field type="spacer" label="Selection settings&lt;hr/&gt;" />
+				<field type="list" label="Selection popup location" name="select_location" default="">
+					<option>Cursor</option>
+					<option value="top">Top</option>
+					<option value="bottom">Bottom</option>
+					<option value="left">Left</option>
+					<option value="right">Right</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

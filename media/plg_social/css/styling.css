@@ -1,0 +1,16 @@
+.tw-share { position: absolute; background-color: #333;  padding: 6px 3px; border-radius: 6px; }
+.tw-share::before { content: ""; display: block; position: absolute; width: 0; height: 0; border: 6px solid transparent; }
+.tw-share--right::before { right: 100%; top: 50%; margin-top: -6px; border-right-color: #333;}
+.tw-share--left::before { left: 100%; top: 50%; margin-top: -6px; border-left-color: #333;}
+.tw-share--top::before { bottom: 100%; left: 50%; margin-left: -6px; border-bottom-color: #333;}
+.tw-share--bottom::before { top: 100%; left: 50%; margin-left: -6px; border-top-color: #333;}
+.tw-share__link { display: block; float: left; width: 32px; height: 32px; margin: 0 3px;background: transparent url("../images/share-sprites.png") no-repeat 0 0; cursor: pointer;}
+.tw-share__link--facebook { background-position: 0 0; }
+.tw-share__link--twitter { background-position: 0 -128px; }
+.tw-share__link--google-plus { background-position: 0 -32px; }
+.tw-share__link--linkedin { background-position: 0 -64px; }
+.tw-share__link--pinterest { background-position: 0 -96px; }
+.tw-share__link--email { background-position: 0 -160px; }
+.tw-share__link:hover { background-position-x: -64px; }
+.tw-share--modest .tw-share__link:hover { background-position-x: -32px; }
+.tw-share-mark {background-color: LemonChiffon;}
