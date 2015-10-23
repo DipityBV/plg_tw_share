@@ -10,8 +10,14 @@
 	<version>0.0.1</version>
 	<description>A plugin that enables social sharing.</description>
 	<files>
-		<filename plugin="social">social.php</filename>
+		<filename plugin="share">share.php</filename>
+		<folder>media</folder>
 	</files>
+	<media folder="media" destination="plg_share">
+		<folder>css</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+	</media>
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
