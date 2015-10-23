@@ -22,7 +22,7 @@ function SocialSharing(config) {
     document.addEventListener('mouseup', function(event) {
         if(this.getSelection()) {
             this.showPopup(event);
-        } else if(this.popup) {
+        } else if(this.popup && this.popup.parentNode) {
             this.popup.parentNode.removeChild(this.popup);
             this.popup = undefined;
         }
@@ -43,8 +43,7 @@ function SocialSharing(config) {
     var elements = document.getElementsByClassName(config.staticClass);
     for(var index in elements) {
         if(elements.hasOwnProperty(index)) {
-            console.log(elements[index]);
-            elements[index].addEventListener('hover', this.showPopup.bind(this, config.position));
+            elements[index].addEventListener('mouseover', this.showPopup.bind(this, config.position));
         }
     }
 }
@@ -73,14 +72,32 @@ SocialSharing.prototype.addAdapter = function(logo, url, buildUrl) {
 SocialSharing.prototype.shareText = function(adapter) {
     // Here we will have everything.
     var url = adapter.buildUrl.call(this, this.getSelection());
-    window.open(adapter.url + url, '', 'width=715,height=450');
+
+    if(typeof url === 'object') {
+        var parts = [];
+
+        for(var index in url) {
+            if(url.hasOwnProperty(index)) {
+                parts.push(index + '=' + url[index]);
+            }
+        }
+
+        url = parts.join('&');
+    }
+
+    window.open(adapter.url + '?' + url, '', 'width=715,height=450');
 };
 
-SocialSharing.prototype.showPopup = function(event) {
+SocialSharing.prototype.showPopup = function(pos, event) {
+    if(pos instanceof Event) {
+        event = pos;
+        pos = this.config.position;
+    }
+
     // Add all the share buttons.
     if(!this.popup) {
         var fragment = document.createDocumentFragment();
-        var position = this.getCoordinates(event, this.config.position);
+        var position = this.getCoordinates(event, pos);
         var popup = document.createElement('div');
 
         popup.classList.add(this.config.popupClasses);
@@ -109,10 +126,16 @@ SocialSharing.prototype.showPopup = function(event) {
 SocialSharing.prototype.getCoordinates = function(event, position) {
     switch(position) {
         case 'top':
+            if(event.target && event.target.tagName === 'SPAN') {
+                this.selection.left = ((event.target.offsetLeft + event.target.offsetLeft + event.target.offsetWidth) / 2);
+                this.selection.top = event.target.offsetTop;
+            } else {
+                this.selection.left = (this.selection.left + event.pageX) / 2;
+            }
 
             return {
                 top: (this.selection.top - 60),
-                left: ((this.selection.left + event.pageX) / 2),
+                left: this.selection.left,
                 extraClass: 'bottom'
             };
             break;

@@ -28,6 +28,7 @@ class PlgContentShare extends JPlugin
                 buttonElement: \'' . $this->params->get('button_element') . '\',
                 shareClass: \'' . $this->params->get('share_class') . '\',
                 popupClasses: \'' . $this->params->get('popup_class') . '\',
+                staticClass: \'' . $this->params->get('hover_class') . '\',
                 position: \'' . $this->params->get('highlight_location') . '\'
             });';
 

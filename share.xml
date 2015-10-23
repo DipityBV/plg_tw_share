@@ -29,6 +29,7 @@
 				<field type="text" label="Popup class name" name="popup_class" default="popup" />
 				<field type="text" label="Popup item elements" name="button_element" default="button" />
 				<field type="text" label="Popup item class" name="share_class" default="share" />
+				<field type="text" label="Highlight class name" name="hover_class" default="highlight" />
 
 				<field type="spacer" label="Service settings&lt;hr/&gt;" />
 				<field type="checkbox" label="Enable Twitter" name="enable_twitter" />
