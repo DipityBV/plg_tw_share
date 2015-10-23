@@ -34,7 +34,7 @@ function SocialSharing(config) {
     for(var index in matches) {
         if(matches.hasOwnProperty(index)) {
             var match = matches[index];
-            var string = '<span class="' + config.staticClass + '">' + match.replace('{share}', '').replace('{/share}', '') + '</span>';
+            var string = '<span class="' + config.staticClass + '" ' + (config.heightlightColor ? 'style="background-color: ' + config.heightlightColor + ';' : '') + '">' + match.replace('{share}', '').replace('{/share}', '') + '</span>';
 
             document.body.innerHTML = document.body.innerHTML.replace(match, string);
         }
@@ -43,7 +43,7 @@ function SocialSharing(config) {
     var elements = document.getElementsByClassName(config.staticClass);
     for(var index in elements) {
         if(elements.hasOwnProperty(index)) {
-            elements[index].addEventListener('mouseover', this.showPopup.bind(this, config.position));
+            elements[index].addEventListener('mouseover', this.showPopup.bind(this, config.highlightPosition));
         }
     }
 }

@@ -38,6 +38,7 @@
 				<field type="checkbox" label="Enable Google Plus" name="enable_google_plus" />
 
 				<field type="spacer" label="Highlight settings&lt;hr/&gt;" />
+				<field type="color" label="Highlight background color" name="highlight_color" default="#FFFACD" />
 				<field type="list" label="Hightlight popup location" name="highlight_location" default="">
 					<option>Cursor</option>
 					<option value="top">Top</option>

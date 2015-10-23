@@ -29,7 +29,9 @@ class PlgContentShare extends JPlugin
                 shareClass: \'' . $this->params->get('share_class') . '\',
                 popupClasses: \'' . $this->params->get('popup_class') . '\',
                 staticClass: \'' . $this->params->get('hover_class') . '\',
-                position: \'' . $this->params->get('highlight_location') . '\'
+                position: \'' . $this->params->get('select_location') . '\',
+                highlightPosition: \'' . $this->params->get('highlight_location') . '\',
+                heightlightColor: \'' . $this->params->get('highlight_color') . '\'
             });';
 
         if($this->params->get('enable_twitter')) {
