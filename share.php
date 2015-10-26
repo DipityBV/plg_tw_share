@@ -31,7 +31,7 @@ class PlgContentShare extends JPlugin
                 staticClass: \'' . $this->params->get('hover_class') . '\',
                 position: \'' . $this->params->get('select_location') . '\',
                 highlightPosition: \'' . $this->params->get('highlight_location') . '\',
-                heightlightColor: \'' . $this->params->get('highlight_color') . '\'
+                highlightColor: \'' . $this->params->get('highlight_color') . '\'
             });';
 
         if($this->params->get('enable_twitter')) {

@@ -21,7 +21,8 @@ function SocialSharing(config) {
 
     document.addEventListener('mouseup', function(event) {
         if(this.getSelection()) {
-            this.showPopup(event);
+            var popup = this.getPopup(event);
+            document.body.appendChild(popup);
         } else if(this.popup && this.popup.parentNode) {
             this.popup.parentNode.removeChild(this.popup);
             this.popup = undefined;
@@ -34,7 +35,7 @@ function SocialSharing(config) {
     for(var index in matches) {
         if(matches.hasOwnProperty(index)) {
             var match = matches[index];
-            var string = '<span class="' + config.staticClass + '" ' + (config.heightlightColor ? 'style="background-color: ' + config.heightlightColor + ';' : '') + '">' + match.replace('{share}', '').replace('{/share}', '') + '</span>';
+            var string = '<span class="' + config.staticClass + '" ' + (config.highlightColor ? 'style="background-color: ' + config.highlightColor + ';' : '') + '">' + match.replace('{share}', '').replace('{/share}', '') + '</span>';
 
             document.body.innerHTML = document.body.innerHTML.replace(match, string);
         }
@@ -43,7 +44,17 @@ function SocialSharing(config) {
     var elements = document.getElementsByClassName(config.staticClass);
     for(var index in elements) {
         if(elements.hasOwnProperty(index)) {
-            elements[index].addEventListener('mouseover', this.showPopup.bind(this, config.highlightPosition));
+            elements[index].addEventListener('mouseover', function(event) {
+                var target = event.target;
+                var popup = this.getPopup(this.config.highlightPosition, event);
+                popup.style.marginBottom = '50px';
+
+                target.appendChild(popup);
+
+                target.addEventListener('mouseout', function() {
+                    popup.parentNode.removeChild(popup);
+                });
+            }.bind(this));
         }
     }
 }
@@ -88,7 +99,7 @@ SocialSharing.prototype.shareText = function(adapter) {
     window.open(adapter.url + '?' + url, '', 'width=715,height=450');
 };
 
-SocialSharing.prototype.showPopup = function(pos, event) {
+SocialSharing.prototype.getPopup = function(pos, event) {
     if(pos instanceof Event) {
         event = pos;
         pos = this.config.position;
@@ -119,8 +130,9 @@ SocialSharing.prototype.showPopup = function(pos, event) {
         }.bind(this));
 
         this.popup = popup;
-        document.body.appendChild(fragment);
     }
+
+    return this.popup;
 };
 
 SocialSharing.prototype.getCoordinates = function(event, position) {
