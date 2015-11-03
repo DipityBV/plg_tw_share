@@ -10,10 +10,10 @@
 	<version>0.0.1</version>
 	<description>A plugin that enables social sharing.</description>
 	<files>
-		<filename plugin="tw-share">tw-share.php</filename>
+		<filename plugin="twshare">twshare.php</filename>
 		<folder>media</folder>
 	</files>
-	<media folder="media" destination="plg_tw-share">
+	<media folder="media" destination="plg_twshare">
 		<folder>css</folder>
 		<folder>images</folder>
 		<folder>js</folder>

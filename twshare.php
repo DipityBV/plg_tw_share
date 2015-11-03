@@ -1,6 +1,6 @@
 <?php
 
-class PlgContentShare extends JPlugin
+class PlgContentTwshare extends JPlugin
 {
     private static $_loaded = false;
 
@@ -11,9 +11,9 @@ class PlgContentShare extends JPlugin
         $document = $app->getDocument();
 
         if($app->isSite() && !self::$_loaded) {
-            $document->addStyleSheet(JUri::base() . '/media/plg_tw-share/css/styling.css');
+            $document->addStyleSheet(JUri::base() . '/media/plg_twshare/css/styling.css');
 
-            $document->addScript(JUri::base() . '/media/plg_tw-share/js/social.js');
+            $document->addScript(JUri::base() . '/media/plg_twshare/js/social.js');
             $document->addScriptDeclaration($this->_getScript());
 
             self::$_loaded = true;
