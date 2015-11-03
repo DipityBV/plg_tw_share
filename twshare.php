@@ -11,6 +11,7 @@ class PlgContentTwshare extends JPlugin
         $document = $app->getDocument();
 
         if($app->isSite() && !self::$_loaded) {
+            $this->_addHighlight($row);
             $document->addStyleSheet(JUri::base() . '/media/plg_twshare/css/styling.css');
 
             $document->addScript(JUri::base() . '/media/plg_twshare/js/social.js');
@@ -18,6 +19,13 @@ class PlgContentTwshare extends JPlugin
 
             self::$_loaded = true;
         }
+    }
+
+    protected function _addHighlight(&$row)
+    {
+        $row->text = preg_replace('/{share}(.*?){\/share}/', '<span class="tw-share-mark">$1</span>', $row->text);
+        $row->introtext = preg_replace('/{share}(.*?){\/share}/', '<span class="tw-share-mark">$1</span>', $row->introtext);
+        $row->fulltext = preg_replace('/{share}(.*?){\/share}/', '<span class="tw-share-mark">$1</span>', $row->fulltext);
     }
 
     protected function _getScript()

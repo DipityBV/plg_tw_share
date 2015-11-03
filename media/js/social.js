@@ -31,18 +31,6 @@ SocialSharing.prototype.bindAll = function() {
         }
     }.bind(this));
 
-    var regex = /{share}(.*?){\/share}/gm;
-    var matches = document.body.innerHTML.match(regex);
-
-    for(var index in matches) {
-        if(matches.hasOwnProperty(index)) {
-            var match = matches[index];
-            var string = '<span class="' + (this.config.baseClass + '-mark') + ' is-inactive" ' + (this.config.highlightColor ? 'style="background-color: ' + this.config.highlightColor + ';' : '') + '">' + match.replace('{share}', '').replace('{/share}', '') + '</span>';
-
-            document.body.innerHTML = document.body.innerHTML.replace(match, string);
-        }
-    }
-
     var elements = document.getElementsByClassName(this.config.baseClass + '-mark');
     for(var index in elements) {
         if(elements.hasOwnProperty(index)) {
