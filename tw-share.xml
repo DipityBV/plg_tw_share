@@ -10,10 +10,10 @@
 	<version>0.0.1</version>
 	<description>A plugin that enables social sharing.</description>
 	<files>
-		<filename plugin="tw-share">share.php</filename>
+		<filename plugin="tw-share">tw-share.php</filename>
 		<folder>media</folder>
 	</files>
-	<media folder="media" destination="tw-share">
+	<media folder="media" destination="plg_share">
 		<folder>css</folder>
 		<folder>images</folder>
 		<folder>js</folder>
@@ -38,6 +38,30 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
+
+				<field
+						type="spacer"
+						label="Global settings&lt;hr/&gt;"/>
+				<field
+						type="text"
+						label="Popup class name"
+						name="popup_class"
+						default="tw-share" />
+				<field
+						type="text"
+						label="Popup item elements"
+						name="button_element"
+						default="a" />
+				<field
+						type="text"
+						label="Popup item class"
+						name="share_class"
+						default="tw-share__link" />
+				<field
+						type="text"
+						label="Highlight class name"
+						name="hover_class"
+						default="tw-share-mark" />
 
 				<field type="spacer" label="Service settings&lt;hr/&gt;" />
 				<field
