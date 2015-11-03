@@ -1,4 +1,4 @@
-# plg_tw_share
+# plg_tw-share
 
 TeemrWorks share plugin for Joomla,
 this plugin add sharing options to selected text.
