@@ -4,7 +4,7 @@
 .tw-share--left::before { left: 100%; top: 50%; margin-top: -4px; border-left-color: #333;}
 .tw-share--top::before { bottom: 100%; left: 50%; margin-left: -4px; border-bottom-color: #333;}
 .tw-share--bottom::before { top: 100%; left: 50%; margin-left: -4px; border-top-color: #333;}
-.tw-share__link, .tw-share-mark::after { display: block; float: left; width: 24px; height: 24px; margin: 0 3px; background: transparent url("/media/plg_share/images/share-sprites-24px.png") no-repeat 0 0; cursor: pointer;}
+.tw-share__link, .tw-share-mark::after { display: block; float: left; width: 24px; height: 24px; margin: 0 3px; background: transparent url("/media/tw-share/images/share-sprites-24px.png") no-repeat 0 0; cursor: pointer;}
 .tw-share__link--facebook { background-position: 0 0; }
 .tw-share__link--google-plus { background-position: 0 -24px; }
 .tw-share__link--linkedin { background-position: 0 -48px; }

@@ -25,10 +25,7 @@ class PlgContentShare extends JPlugin
         // Here we wil concat the needed strings.
         $script = 'window.addEventListener(\'load\', function(event) {
             var social = new SocialSharing({
-                buttonElement: \'' . $this->params->get('button_element') . '\',
-                shareClass: \'' . $this->params->get('share_class') . '\',
-                popupClasses: \'' . $this->params->get('popup_class') . '\',
-                staticClass: \'' . $this->params->get('hover_class') . '\',
+                baseClass: \'tw-share\',
                 position: \'' . $this->params->get('select_location') . '\',
                 highlightPosition: \'' . $this->params->get('highlight_location') . '\',
                 highlightColor: \'' . $this->params->get('highlight_color') . '\'
@@ -36,7 +33,7 @@ class PlgContentShare extends JPlugin
 
         if($this->params->get('enable_twitter')) {
             $script .= '
-                social.addAdapter(\'tw-share__link--twitter\', \'http://twitter.com/share\', function(text) {
+                social.addAdapter(\'twitter\', \'http://twitter.com/share\', function(text) {
                     if(text.length > 140) {
                         text = text.substring(0, 140 - ((\'...\'.length) + (window.location.toString().length + 1)));
                     }
@@ -61,7 +58,7 @@ class PlgContentShare extends JPlugin
 
         if($this->params->get('enable_facebook')) {
             $script .= '
-                social.addAdapter(\'tw-share__link--facebook\', \'https://www.facebook.com/sharer/sharer.php\', function(text) {
+                social.addAdapter(\'facebook\', \'https://www.facebook.com/sharer/sharer.php\', function(text) {
                     return {
                         u: window.location.toString(),
                         text: text
@@ -72,7 +69,7 @@ class PlgContentShare extends JPlugin
 
         if($this->params->get('enable_pinterest')) {
             $script .= '
-                social.addAdapter(\'tw-share__link--pinterest\', \'https://www.pinterest.com/pin/create/button/\', function(text) {
+                social.addAdapter(\'pinterest\', \'https://www.pinterest.com/pin/create/button/\', function(text) {
                     return {
                         url: window.location.toString(),
                         description: text
@@ -83,7 +80,7 @@ class PlgContentShare extends JPlugin
 
         if($this->params->get('enable_google_plus')) {
             $script .= '
-                social.addAdapter(\'tw-share__link--google-plus\', \'https://plus.google.com/share\', function(text) {
+                social.addAdapter(\'google-plus\', \'https://plus.google.com/share\', function(text) {
                     return {
                         url: window.location.toString(),
                         description: text
@@ -91,6 +88,8 @@ class PlgContentShare extends JPlugin
                 });
             ';
         }
+
+        $script .= 'social.bindAll()';
 
         return $script .= '});';
     }

@@ -13,7 +13,9 @@ function SocialSharing(config) {
             }
         }
     }
+}
 
+SocialSharing.prototype.bindAll = function() {
     document.addEventListener('mousedown', function(event) {
         this.selection.top = event.pageY;
         this.selection.left = event.pageX;
@@ -35,29 +37,20 @@ function SocialSharing(config) {
     for(var index in matches) {
         if(matches.hasOwnProperty(index)) {
             var match = matches[index];
-            var string = '<span class="' + config.staticClass + '" ' + (config.highlightColor ? 'style="background-color: ' + config.highlightColor + ';' : '') + '">' + match.replace('{share}', '').replace('{/share}', '') + '</span>';
+            var string = '<span class="' + (this.config.baseClass + '-mark') + ' is-inactive" ' + (this.config.highlightColor ? 'style="background-color: ' + this.config.highlightColor + ';' : '') + '">' + match.replace('{share}', '').replace('{/share}', '') + '</span>';
 
             document.body.innerHTML = document.body.innerHTML.replace(match, string);
         }
     }
 
-    var elements = document.getElementsByClassName(config.staticClass);
+    var elements = document.getElementsByClassName(this.config.baseClass + '-mark');
     for(var index in elements) {
         if(elements.hasOwnProperty(index)) {
-            elements[index].addEventListener('mouseover', function(event) {
-                var target = event.target;
-                var popup = this.getPopup(this.config.highlightPosition, event);
-                popup.style.marginBottom = '50px';
-
-                target.appendChild(popup);
-
-                target.addEventListener('mouseout', function() {
-                    popup.parentNode.removeChild(popup);
-                });
-            }.bind(this));
+            var popup = this.getPopup(this.config.highlightPosition, event, false);
+            elements[index].appendChild(popup);
         }
     }
-}
+};
 
 /**
  * This method adds an adapter, this adapter will receive a logo, a share url, can be used with %s and the likes,
@@ -99,7 +92,7 @@ SocialSharing.prototype.shareText = function(adapter) {
     window.open(adapter.url + '?' + url, '', 'width=715,height=450');
 };
 
-SocialSharing.prototype.getPopup = function(pos, event) {
+SocialSharing.prototype.getPopup = function(pos, event, writeGlobal) {
     if(pos instanceof Event) {
         event = pos;
         pos = this.config.position;
@@ -111,9 +104,9 @@ SocialSharing.prototype.getPopup = function(pos, event) {
         var position = this.getCoordinates(event, pos);
         var popup = document.createElement('div');
 
-        popup.classList.add(this.config.popupClasses);
+        popup.classList.add(this.config.baseClass);
         if(position.extraClass) {
-            popup.classList.add(this.config.popupClasses + '--' + position.extraClass);
+            popup.classList.add(this.config.baseClass + '--' + position.extraClass);
         }
 
         popup.style.top = position.top + 'px';
@@ -121,18 +114,20 @@ SocialSharing.prototype.getPopup = function(pos, event) {
         popup = fragment.appendChild(popup);
 
         this.adapters.forEach(function (item, key) {
-            var button = document.createElement(this.config.buttonElement);
-            button.classList.add(this.config.shareClass);
-            button.classList.add(item.logo);
+            var button = document.createElement('a');
+            button.classList.add(this.config.baseClass + '__link');
+            button.classList.add(this.config.baseClass + '__link--' + item.logo);
             button.addEventListener('mousedown', this.shareText.bind(this, item));
 
             popup.appendChild(button);
         }.bind(this));
 
-        this.popup = popup;
+        if(writeGlobal !== false) {
+            this.popup = popup;
+        }
     }
 
-    return this.popup;
+    return this.popup ? this.popup : popup;
 };
 
 SocialSharing.prototype.getCoordinates = function(event, position) {
