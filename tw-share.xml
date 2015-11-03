@@ -13,7 +13,7 @@
 		<filename plugin="tw-share">share.php</filename>
 		<folder>media</folder>
 	</files>
-	<media folder="media" destination="plg_share">
+	<media folder="media" destination="tw-share">
 		<folder>css</folder>
 		<folder>images</folder>
 		<folder>js</folder>
