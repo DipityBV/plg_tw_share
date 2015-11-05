@@ -15,21 +15,48 @@ function SocialSharing(config) {
     }
 }
 
-SocialSharing.prototype.bindAll = function() {
-    document.addEventListener('mousedown', function(event) {
-        this.selection.top = event.pageY;
-        this.selection.left = event.pageX;
-    }.bind(this));
+SocialSharing.prototype._getElement = function(element) {
+    if(element.charAt(0) === '.') {
+        return document.getElementsByClassName(element.substring(1));
+    } else if(element.charAt(0) === '#') {
+        return document.getElementById(element.substring(1));
+    }
+};
 
-    document.addEventListener('mouseup', function(event) {
-        if(this.getSelection()) {
-            var popup = this.getPopup(event);
-            document.body.appendChild(popup);
-        } else if(this.popup && this.popup.parentNode) {
-            this.popup.parentNode.removeChild(this.popup);
-            this.popup = undefined;
+SocialSharing.prototype.bindAll = function() {
+    var bindToElement = function(element) {
+        element.addEventListener('mousedown', function (event) {
+            this.selection.top = event.pageY;
+            this.selection.left = event.pageX;
+        }.bind(this));
+
+        element.addEventListener('mouseup', function (event) {
+            if (this.getSelection()) {
+                var popup = this.getPopup(event);
+                document.body.appendChild(popup);
+            } else if (this.popup && this.popup.parentNode) {
+                this.popup.parentNode.removeChild(this.popup);
+                this.popup = undefined;
+            }
+        }.bind(this));
+    }.bind(this);
+
+    for(var index in this.config.containers) {
+        if (this.config.containers.hasOwnProperty(index)) {
+            var container = this.config.containers[index];
+            var element = this._getElement(container);
+
+            if(element.length) {
+                for(var idx in element) {
+                    if(element.hasOwnProperty(idx)) {
+                        bindToElement(element[idx]);
+                    }
+                }
+            } else {
+                bindToElement(element);
+            }
         }
-    }.bind(this));
+    }
 
     var elements = document.getElementsByClassName(this.config.baseClass + '-mark');
     for(var index in elements) {

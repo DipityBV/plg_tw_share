@@ -33,6 +33,7 @@ class PlgContentTwshare extends JPlugin
         // Here we wil concat the needed strings.
         $script = 'window.addEventListener(\'load\', function(event) {
             var social = new SocialSharing({
+                containers: [\'.blog\', \'.well\'],
                 baseClass: \'tw-share\',
                 position: \'' . $this->params->get('select_location') . '\',
                 highlightPosition: \'' . $this->params->get('highlight_location') . '\',
