@@ -12,9 +12,9 @@ class PlgContentTwshare extends JPlugin
 
         if($app->isSite() && !self::$_loaded) {
             $this->_addHighlight($row);
-            $document->addStyleSheet(JUri::base() . '/media/plg_twshare/css/styling.css');
+            $document->addStyleSheet(JUri::base() . '/media/plg_tw_share/css/styling.css');
 
-            $document->addScript(JUri::base() . '/media/plg_twshare/js/social.js');
+            $document->addScript(JUri::base() . '/media/plg_tw_share/js/social.js');
             $document->addScriptDeclaration($this->_getScript());
 
             self::$_loaded = true;
@@ -33,7 +33,7 @@ class PlgContentTwshare extends JPlugin
         // Here we wil concat the needed strings.
         $script = 'window.addEventListener(\'load\', function(event) {
             var social = new SocialSharing({
-                containers: [\'.blog\', \'.well\'],
+                containers: [' . implode('\',\'', explode(',', $this->params->get('selection_elements'))) . '],
                 baseClass: \'tw-share\',
                 position: \'' . $this->params->get('select_location') . '\',
                 highlightPosition: \'' . $this->params->get('highlight_location') . '\',

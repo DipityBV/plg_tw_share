@@ -103,6 +103,10 @@
 						type="spacer"
 						label="Selection settings&lt;hr/&gt;"/>
 				<field
+						type="text"
+						name="element selectors"
+						description="The selectors of elements"/>
+				<field
 						type="list"
 						label="Selection popup location"
 						name="select_location"
