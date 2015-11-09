@@ -21,7 +21,7 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-				<field type="spacer" label="Basic plugins&lt;hr/&gt;" />
+				<field type="spacer" label="&lt;strong&gt;Basic plugins&lt;/strong&gt;&lt;hr/&gt;" />
 				<field
 						type="radio"
 						label="Enable highlighting"
@@ -41,7 +41,8 @@
 					<option value="1">JYES</option>
 				</field>
 
-				<field type="spacer" label="Service settings&lt;hr/&gt;" />
+				<field type="spacer"
+					   label="&lt;br/&gt;&lt;strong&gt;Service settings&lt;/strong&gt;&lt;hr/&gt;" />
 				<field
 						type="radio"
 						label="Enable Twitter"
@@ -81,16 +82,15 @@
 
 				<field
 						type="spacer"
-						label="Highlight settings&lt;hr/&gt;" />
+						label="&lt;br/&gt;&lt;strong&gt;Selection settings&lt;/strong&gt;&lt;hr/&gt;"/>
 				<field
-						type="color"
-						label="Highlight background color"
-						name="highlight_color"
-						default="#FFFACD" />
+						type="text"
+						name="selectors"
+						description="The selectors of elements"/>
 				<field
 						type="list"
-						label="Hightlight popup location"
-						name="highlight_location"
+						label="Selection popup location"
+						name="select_location"
 						default="">
 					<option>Cursor</option>
 					<option value="top">Top</option>
@@ -101,15 +101,16 @@
 
 				<field
 						type="spacer"
-						label="Selection settings&lt;hr/&gt;"/>
+						label="&lt;br/&gt;&lt;strong&gt;Highlight settings&lt;/strong&gt;&lt;hr/&gt;" />
 				<field
-						type="text"
-						name="selectors"
-						description="The selectors of elements"/>
+						type="color"
+						label="Highlight background color"
+						name="highlight_color"
+						default="#FFFACD" />
 				<field
 						type="list"
-						label="Selection popup location"
-						name="select_location"
+						label="Hightlight popup location"
+						name="highlight_location"
 						default="">
 					<option>Cursor</option>
 					<option value="top">Top</option>
