@@ -96,7 +96,7 @@
 						type="list"
 						label="Selection popup location"
 						name="select_location"
-						default="">
+						default="top">
 					<option>Cursor</option>
 					<option value="top">Top</option>
 					<option value="bottom">Bottom</option>
@@ -111,7 +111,7 @@
 						type="list"
 						label="Hightlight popup location"
 						name="highlight_location"
-						default="">
+						default="top">
 					<option>Cursor</option>
 					<option value="top">Top</option>
 					<option value="bottom">Bottom</option>
