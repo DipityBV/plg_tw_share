@@ -12,8 +12,11 @@ class PlgContentTw_share extends JPlugin
 
         if($app->isSite() && !self::$_loaded) {
             $this->_addHighlight($row);
-            $document->addStyleSheet(JUri::base() . '/media/plg_tw_share/css/tw_share.css');
 
+            // Load jQuery
+            JHtml::_('jquery.framework');
+
+            $document->addStyleSheet(JUri::base() . '/media/plg_tw_share/css/tw_share.css');
             $document->addScript(JUri::base() . '/media/plg_tw_share/js/tw_share.js');
             $document->addScriptDeclaration($this->_getScript());
 
