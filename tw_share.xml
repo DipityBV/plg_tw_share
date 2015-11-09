@@ -104,7 +104,7 @@
 						label="Selection settings&lt;hr/&gt;"/>
 				<field
 						type="text"
-						name="element selectors"
+						name="selectors"
 						description="The selectors of elements"/>
 				<field
 						type="list"
