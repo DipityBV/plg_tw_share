@@ -16,14 +16,7 @@ class PlgContentTw_share extends JPlugin
             // Load jQuery
             JHtml::_('jquery.framework');
 
-            // Check for a stylesheet override in the active template
-            if( JFile::exists( JPATH_THEMES . '/' . $app->getTemplate() . '/css/tw_share.css' )) {
-                $document->addStyleSheet(JUri::base() . '/templates/' . $app->getTemplate() . '/css/tw_share.css');
-            }
-            else {
-                $document->addStyleSheet(JUri::base() . '/media/plg_tw_share/css/tw_share.css');
-            }
-
+            $document->addStylesheet($this->_getStyles());
             $document->addScript(JUri::base() . '/media/plg_tw_share/js/tw_share.js');
             $document->addScriptDeclaration($this->_getScript());
 
@@ -36,6 +29,20 @@ class PlgContentTw_share extends JPlugin
         $row->text = preg_replace('/{share}(.*?){\/share}/', '<span class="tw-share-mark">$1</span>', $row->text);
         $row->introtext = preg_replace('/{share}(.*?){\/share}/', '<span class="tw-share-mark">$1</span>', $row->introtext);
         $row->fulltext = preg_replace('/{share}(.*?){\/share}/', '<span class="tw-share-mark">$1</span>', $row->fulltext);
+    }
+
+    protected function  _getStyles()
+    {
+        $app = JFactory::getApplication();
+
+        $stylesheet = JUri::base() . '/media/plg_tw_share/css/tw_share.css';
+
+        // Check for a stylesheet override in the active template
+        if( JFile::exists( JPATH_THEMES . '/' . $app->getTemplate() . '/css/tw_share.css' )) {
+            $stylesheet = JUri::base() . 'templates/' . $app->getTemplate() . '/css/tw_share.css';
+        }
+
+        return $stylesheet;
     }
 
     protected function _getScript()
