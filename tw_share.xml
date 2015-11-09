@@ -8,11 +8,16 @@
 	<authorEmail>jasper@teemr.com</authorEmail>
 	<authorUrl>teemr.works</authorUrl>
 	<version>0.0.1</version>
-	<description>Sexy social media sharing. Inspired by Medium and Invision.</description>
+	<description>PLG_CONTENT_TW_SHARE_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="tw_share">tw_share.php</filename>
 		<folder>media</folder>
+		<folder>language</folder>
 	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.plg_content_tw_share.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.plg_content_tw_share.sys.ini</language>
+	</languages>
 	<media folder="media" destination="plg_tw_share">
 		<folder>css</folder>
 		<folder>images</folder>
