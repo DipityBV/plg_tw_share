@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.1" type="plugin" group="content" method="upgrade">
 	<name>Content - Teemr Works Social Sharing</name>
-	<author>Teemr</author>
+	<author>Teemr Works</author>
 	<creationDate>21 October 2015</creationDate>
 	<copyright>Copyright (C) 2015 Teemr Works. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>jasper@teemr.com</authorEmail>
-	<authorUrl>teemr.com</authorUrl>
+	<authorUrl>teemr.works</authorUrl>
 	<version>0.0.1</version>
-	<description>A plugin that enables social sharing.</description>
+	<description>Sexy social media sharing. Inspired by Medium and Invision.</description>
 	<files>
-		<filename plugin="twshare">twshare.php</filename>
+		<filename plugin="tw_share">tw_share.php</filename>
 		<folder>media</folder>
 	</files>
 	<media folder="media" destination="plg_tw_share">

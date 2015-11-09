@@ -1,6 +1,6 @@
 <?php
 
-class PlgContentTwshare extends JPlugin
+class PlgContentTw_share extends JPlugin
 {
     private static $_loaded = false;
 
@@ -12,9 +12,9 @@ class PlgContentTwshare extends JPlugin
 
         if($app->isSite() && !self::$_loaded) {
             $this->_addHighlight($row);
-            $document->addStyleSheet(JUri::base() . '/media/plg_tw_share/css/styling.css');
+            $document->addStyleSheet(JUri::base() . '/media/plg_tw_share/css/tw_share.css');
 
-            $document->addScript(JUri::base() . '/media/plg_tw_share/js/social.js');
+            $document->addScript(JUri::base() . '/media/plg_tw_share/js/tw_share.js');
             $document->addScriptDeclaration($this->_getScript());
 
             self::$_loaded = true;
