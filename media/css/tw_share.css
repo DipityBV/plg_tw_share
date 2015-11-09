@@ -1,4 +1,4 @@
-.tw-share { position: absolute; background-color: #333;  padding: 4px 3px; border-radius: 4px; }
+.tw-share { position: absolute; background-color: #333; padding: 4px 3px; border-radius: 4px; }
 .tw-share::before { content: ""; display: block; position: absolute; width: 0; height: 0; border: 4px solid transparent; }
 .tw-share--right::before { right: 100%; top: 50%; margin-top: -4px; border-right-color: #333;}
 .tw-share--left::before { left: 100%; top: 50%; margin-top: -4px; border-left-color: #333;}
@@ -13,7 +13,7 @@
 .tw-share__link--email { background-position: 0 -120px; }
 .tw-share__link--comment { background-position: 0 -144px; }
 .tw-share__link--ellipsis { background-position: 0 -168px; }
-.tw-share__link:hover { background-position-x: -48px; }
+.tw-share__link:hover, .tw-share-mark::after { background-position-x: -48px; }
 .tw-share--modest .tw-share__link:hover { background-position-x: -24px; }
 .tw-share-mark { background-color: LemonChiffon; position: relative; padding: .25em; padding-right: 27px; padding-right: calc(24px + .5em); }
 .tw-share-mark::after { content: ""; position: absolute; bottom: .25em; display: inline-block; width: 24px; height: 24px; margin-left: .5em; border-radius: 4px; text-align: center; line-height: 24px; color: #fff;}
