@@ -16,7 +16,14 @@ class PlgContentTw_share extends JPlugin
             // Load jQuery
             JHtml::_('jquery.framework');
 
-            $document->addStyleSheet(JUri::base() . '/media/plg_tw_share/css/tw_share.css');
+            // Check for a stylesheet override in the active template
+            if( JFile::exists( JPATH_THEMES . '/' . $app->getTemplate() . '/css/tw_share.css' )) {
+                $document->addStyleSheet(JUri::base() . '/templates/' . $app->getTemplate() . '/css/tw_share.css');
+            }
+            else {
+                $document->addStyleSheet(JUri::base() . '/media/plg_tw_share/css/tw_share.css');
+            }
+
             $document->addScript(JUri::base() . '/media/plg_tw_share/js/tw_share.js');
             $document->addScriptDeclaration($this->_getScript());
 
