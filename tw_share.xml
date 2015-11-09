@@ -108,11 +108,6 @@
 						type="spacer"
 						label="&lt;br/&gt;&lt;strong&gt;Highlight settings&lt;/strong&gt;&lt;hr/&gt;" />
 				<field
-						type="color"
-						label="Highlight background color"
-						name="highlight_color"
-						default="#FFFACD" />
-				<field
 						type="list"
 						label="Hightlight popup location"
 						name="highlight_location"
