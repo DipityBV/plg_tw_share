@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.1" type="plugin" group="content" method="upgrade">
-	<name>Social Sharing Plugin</name>
+	<name>Content - Teemr Works Social Sharing</name>
 	<author>Teemr</author>
 	<creationDate>21 October 2015</creationDate>
 	<copyright>Copyright (C) 2015 Teemr. All rights reserved.</copyright>
