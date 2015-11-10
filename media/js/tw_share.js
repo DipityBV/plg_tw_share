@@ -1,8 +1,92 @@
+; (function($, window) {
+    var defaults = {
+        baseClass: '',
+        position: '',
+        enabled: ['highlight', 'select'],
+        highlightColor: '',
+        adapters: []
+    };
+
+    function Social() {
+        this.adapters = [];
+        this.selection = {};
+    }
+
+    $.extend(Social, {
+        getPopup: function() {
+            var popup = document.createElement('div');
+            popup.classList.add(defaults.baseClass);
+
+            defaults.adapters.forEach(function (item, key) {
+                var button = document.createElement('a');
+                button.classList.add(defaults.baseClass + '__link');
+                button.classList.add(defaults.baseClass + '__link--' + item.logo);
+                button.addEventListener('mousedown', this.prototype.shareText.bind(this, item));
+
+                popup.appendChild(button);
+            }.bind(this));
+
+            return $(popup).html();
+        }
+    });
+
+    $.extend(Social.prototype, {
+        getSelection: function() {
+            var text = '';
+
+            if (window.getSelection) {
+                text = window.getSelection().toString();
+            } else if (document.getSelection) {
+                text = document.getSelection().toString();
+            } else if (document.selection && document.selection.type != "Control") {
+                text = document.selection.createRange().text;
+            }
+
+            return text;
+        },
+        shareText: function(adapter) {
+            var url = adapter.buildUrl.call(this, this.getSelection());
+
+            if (typeof url === 'object') {
+                var parts = [];
+
+                for (var index in url) {
+                    if (url.hasOwnProperty(index)) {
+                        parts.push(index + '=' + url[index]);
+                    }
+                }
+
+                url = parts.join('&');
+            }
+
+            window.open(adapter.url + '?' + url, '', 'width=715,height=450');
+        },
+
+    });
+
+    $.fn.select = function(config) {
+        this.each(function() {
+
+        });
+
+        $.extend(defaults, config);
+    };
+
+    $.fn.highlight = function(config) {
+        $.extend(defaults, config);
+
+        this.each(function() {
+            $(this).off('mouseup, mousedown');
+            $(this).append(Social.getPopup());
+        });
+    };
+})(window.jQuery, window);
+
 function SocialSharing(config) {
     this.adapters = [];
     this.config = config || {};
-    this.popup = undefined;
     this.selection = {};
+    this.popup = undefined;
 
     if(config.adapters && typeof config.adapters.push === 'function') {
         for(var index in config.adapters) {
@@ -14,136 +98,6 @@ function SocialSharing(config) {
         }
     }
 }
-
-SocialSharing.prototype._getElement = function(element) {
-    if(element.charAt(0) === '.') {
-        return document.getElementsByClassName(element.substring(1));
-    } else if(element.charAt(0) === '#') {
-        return document.getElementById(element.substring(1));
-    }
-};
-
-SocialSharing.prototype.bindAll = function() {
-    var bindToElement = function(element) {
-        element.addEventListener('mousedown', function (event) {
-            this.selection.top = event.pageY;
-            this.selection.left = event.pageX;
-        }.bind(this));
-
-        element.addEventListener('mouseup', function (event) {
-            if (this.getSelection()) {
-                var popup = this.getPopup(event);
-                document.body.appendChild(popup);
-            } else if (this.popup && this.popup.parentNode) {
-                this.popup.parentNode.removeChild(this.popup);
-                this.popup = undefined;
-            }
-        }.bind(this));
-    }.bind(this);
-
-    for(var index in this.config.containers) {
-        if (this.config.containers.hasOwnProperty(index)) {
-            var container = this.config.containers[index];
-            var element = this._getElement(container);
-
-            if(element.length) {
-                for(var idx in element) {
-                    if(element.hasOwnProperty(idx)) {
-                        bindToElement(element[idx]);
-                    }
-                }
-            } else {
-                bindToElement(element);
-            }
-        }
-    }
-
-    var elements = document.getElementsByClassName(this.config.baseClass + '-mark');
-    for(var index in elements) {
-        if(elements.hasOwnProperty(index)) {
-            var popup = this.getPopup(this.config.highlightPosition, event, false);
-            elements[index].appendChild(popup);
-        }
-    }
-};
-
-/**
- * This method adds an adapter, this adapter will receive a logo, a share url, can be used with %s and the likes,
- * and a serializer, this is an extra function which is used to serialize the data.
- *
- * Also the logo will be used as an identifier.
- *
- * @param {String} logo The logo class
- * @param {String} url The sharing url
- * @param {Function} buildUrl The function which adds extra checks on the text.
- * @returns {SocialSharing} The current object
- */
-SocialSharing.prototype.addAdapter = function(logo, url, buildUrl) {
-    this.adapters.push({
-        logo: logo,
-        url: url,
-        buildUrl: buildUrl
-    });
-
-    return this;
-};
-
-SocialSharing.prototype.shareText = function(adapter) {
-    // Here we will have everything.
-    var url = adapter.buildUrl.call(this, this.getSelection());
-
-    if(typeof url === 'object') {
-        var parts = [];
-
-        for(var index in url) {
-            if(url.hasOwnProperty(index)) {
-                parts.push(index + '=' + url[index]);
-            }
-        }
-
-        url = parts.join('&');
-    }
-
-    window.open(adapter.url + '?' + url, '', 'width=715,height=450');
-};
-
-SocialSharing.prototype.getPopup = function(pos, event, writeGlobal) {
-    if(pos instanceof Event) {
-        event = pos;
-        pos = this.config.position;
-    }
-
-    // Add all the share buttons.
-    if(!this.popup) {
-        var fragment = document.createDocumentFragment();
-        var position = this.getCoordinates(event, pos);
-        var popup = document.createElement('div');
-
-        popup.classList.add(this.config.baseClass);
-        if(position.extraClass) {
-            popup.classList.add(this.config.baseClass + '--' + position.extraClass);
-        }
-
-        popup.style.top = position.top + 'px';
-        popup.style.left = position.left + 'px';
-        popup = fragment.appendChild(popup);
-
-        this.adapters.forEach(function (item, key) {
-            var button = document.createElement('a');
-            button.classList.add(this.config.baseClass + '__link');
-            button.classList.add(this.config.baseClass + '__link--' + item.logo);
-            button.addEventListener('mousedown', this.shareText.bind(this, item));
-
-            popup.appendChild(button);
-        }.bind(this));
-
-        if(writeGlobal !== false) {
-            this.popup = popup;
-        }
-    }
-
-    return this.popup ? this.popup : popup;
-};
 
 SocialSharing.prototype.getCoordinates = function(event, position) {
     switch(position) {
@@ -173,16 +127,4 @@ SocialSharing.prototype.getCoordinates = function(event, position) {
         default:
             return {left: event.pageX, top: event.pageY};
     }
-};
-
-SocialSharing.prototype.getSelection = function() {
-    var text = '';
-
-    if (window.getSelection) {
-        text = window.getSelection().toString();
-    } else if (document.selection && document.selection.type != "Control") {
-        text = document.selection.createRange().text;
-    }
-
-    return text;
 };

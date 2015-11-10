@@ -47,19 +47,13 @@ class PlgContentTw_share extends JPlugin
 
     protected function _getScript()
     {
-        // Here we wil concat the needed strings.
-        $script = 'window.addEventListener(\'load\', function(event) {
-            var social = new SocialSharing({
-                containers: [\'' . implode('\',\'', explode(',', $this->params->get('selectors'))) . '\'],
-                baseClass: \'tw-share\',
-                position: \'' . $this->params->get('select_location') . '\',
-                highlightPosition: \'' . $this->params->get('highlight_location') . '\',
-                highlightColor: \'' . $this->params->get('highlight_color') . '\'
-            });';
+        $media = array();
 
         if($this->params->get('enable_twitter')) {
-            $script .= '
-                social.addAdapter(\'twitter\', \'http://twitter.com/share\', function(text) {
+            $media[] = '{
+                logo: \'twitter\',
+                url: \'http://twitter.com/share\',
+                buildUrl: function(text) {
                     if(text.length > 140) {
                         text = text.substring(0, 140 - ((\'...\'.length) + (window.location.toString().length + 1)));
                     }
@@ -78,45 +72,61 @@ class PlgContentTw_share extends JPlugin
                     }
 
                     return tweet;
-                });
-            ';
+                }
+            }';
         }
 
         if($this->params->get('enable_facebook')) {
-            $script .= '
-                social.addAdapter(\'facebook\', \'https://www.facebook.com/sharer/sharer.php\', function(text) {
+            $media[] = '{
+                logo: \'facebook\',
+                url: \'https://www.facebook.com/sharer/sharer.php\',
+                buildUrl: function(text) {
                     return {
                         u: window.location.toString(),
                         text: text
                     };
-                });
-            ';
+                }
+            }';
         }
 
         if($this->params->get('enable_pinterest')) {
-            $script .= '
-                social.addAdapter(\'pinterest\', \'https://www.pinterest.com/pin/create/button/\', function(text) {
+            $media[] = '{
+                logo: \'pinterest\',
+                url: \'https://www.pinterest.com/pin/create/button/\',
+                buildUrl: function(text) {
                     return {
                         url: window.location.toString(),
                         description: text
                     };
-                });
-            ';
+                }
+            }';
         }
 
         if($this->params->get('enable_google_plus')) {
-            $script .= '
-                social.addAdapter(\'google-plus\', \'https://plus.google.com/share\', function(text) {
+            $media[] = '{
+                logo: \'google-plus\',
+                url: \'https://plus.google.com/share\',
+                buildUrl: function(text) {
                     return {
                         url: window.location.toString(),
                         description: text
                     };
-                });
-            ';
+                }
+            }';
         }
 
-        $script .= 'social.bindAll()';
+        // Here we wil concat the needed strings.
+        return 'jQuery(function($) {
+            var config = {
+                baseClass: \'tw-share\',
+                position: \'' . $this->params->get('select_location') . '\',
+                highlightColor: \'' . $this->params->get('highlight_color') . '\',
+                adapters: [' . implode(',', $media) . ']
+            }
 
-        return $script .= '});';
+            $(\'.tw-share-mark\').highlight(config);
+
+            $(\'' . $this->params->get('selectors') . '\').select(config);
+        });';
     }
 }
