@@ -2,8 +2,6 @@
     var defaults = {
         baseClass: '',
         position: '',
-        enabled: ['highlight', 'select'],
-        highlightColor: '',
         adapters: []
     };
 
