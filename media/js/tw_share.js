@@ -14,11 +14,11 @@
 
     $.extend(Social, {
         getPopup: function() {
-            var popup = $(document.createElement('div'));
+            var popup = $(document.createElement('span'));
             popup.addClass(defaults.baseClass);
 
             defaults.adapters.forEach(function (item, key) {
-                var button = $(document.createElement('a'));
+                var button = $(document.createElement('span'));
                 button.addClass(defaults.baseClass + '__link');
                 button.addClass(defaults.baseClass + '__link--' + item.logo);
                 button.on('mousedown', this.prototype.shareText.bind(this, item));
