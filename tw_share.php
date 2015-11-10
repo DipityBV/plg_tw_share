@@ -51,12 +51,12 @@ class PlgContentTw_share extends JPlugin
         return 'jQuery(function($) {
             $(\'.tw-share-mark\').highlight({
                 baseClass: \'tw-share\',
-                position: \'' . $this->params->get('select_location') . '\',
                 adapters: [' . implode(',', $this->_getScriptAdapters('selection')) . ']
             });
 
             $(\'' . $this->params->get('selectors') . '\').select({
                 baseClass: \'tw-share\',
+                position: \'' . $this->params->get('select_location') . '\',
                 adapters: [' . implode(',', $this->_getScriptAdapters('highlight')) . ']
             });
         });';

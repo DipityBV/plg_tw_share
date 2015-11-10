@@ -93,12 +93,10 @@
 
                 if(selection) {
                     // get the position.
-                    console.log(social.config);
-
                     switch(social.config.position) {
                         case 'top':
-                            css.top = top;
-                            css.left = center;
+                            css.top = (top - 50);
+                            css.left = (center - ((social.config.adapters.length / 2) * 24));
                             css.extra_class = 'bottom';
                             break;
                         default:
