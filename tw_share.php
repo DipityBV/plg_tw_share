@@ -3,19 +3,24 @@
 class PlgContentTw_share extends JPlugin
 {
     private static $_loaded = false;
+    protected $_row;
 
     public function onContentBeforeDisplay($context, &$row, &$params, $page = 0)
     {
         // Here we need to add the stuff to our html.
         $app = JFactory::getApplication();
-        $document = $app->getDocument();
 
         if($app->isSite() && !self::$_loaded) {
+
+            // Make the content available to the adapters
+            $this->_row = $row;
+
             $this->_addHighlight($row);
 
             // Load jQuery
             JHtml::_('jquery.framework');
 
+            $document = $app->getDocument();
             $document->addStylesheet($this->_getStyles());
             $document->addScript(JUri::base() . '/media/plg_tw_share/js/tw_share.js');
             $document->addScriptDeclaration($this->_getScript());
@@ -101,6 +106,41 @@ class PlgContentTw_share extends JPlugin
             }';
         }
 
+        if($this->params->get($namespace . '_enable_google_plus')) {
+            $media[] = '{
+                logo: \'google-plus\',
+                url: \'https://plus.google.com/share\',
+                buildUrl: function(text) {
+                    return {
+                        url: window.location.toString(),
+                        description: text
+                    };
+                }
+            }';
+        }
+
+        if($this->params->get($namespace . '_enable_linkedin')) {
+
+            $config = JFactory::getConfig();
+
+            $site_title = $config->get( 'sitename' );
+            $title = isset( $this->_row->title ) ? $this->_row->title : "";
+
+            $media[] = '{
+                logo: \'linkedin\',
+                url: \'https://www.linkedin.com/shareArticle\',
+                buildUrl: function(text) {
+                    return {
+                        mini: true,
+                        url: window.location.toString(),
+                        title: "'.$title.'",
+                        summary: text,
+                        source: "'.$site_title.'"
+                    };
+                }
+            }';
+        }
+
         if($this->params->get($namespace . '_enable_facebook')) {
             $media[] = '{
                 logo: \'facebook\',
@@ -118,19 +158,6 @@ class PlgContentTw_share extends JPlugin
             $media[] = '{
                 logo: \'pinterest\',
                 url: \'https://www.pinterest.com/pin/create/button/\',
-                buildUrl: function(text) {
-                    return {
-                        url: window.location.toString(),
-                        description: text
-                    };
-                }
-            }';
-        }
-
-        if($this->params->get($namespace . '_enable_google_plus')) {
-            $media[] = '{
-                logo: \'google-plus\',
-                url: \'https://plus.google.com/share\',
                 buildUrl: function(text) {
                     return {
                         url: window.location.toString(),
