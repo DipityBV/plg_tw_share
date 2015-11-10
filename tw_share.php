@@ -47,9 +47,25 @@ class PlgContentTw_share extends JPlugin
 
     protected function _getScript()
     {
+        // Here we wil concat the needed strings.
+        return 'jQuery(function($) {
+            $(\'.tw-share-mark\').highlight({
+                baseClass: \'tw-share\',
+                position: \'' . $this->params->get('select_location') . '\',
+                adapters: [' . implode(',', $this->_getScriptAdapters('selection')) . ']
+            });
+
+            $(\'' . $this->params->get('selectors') . '\').select({
+                baseClass: \'tw-share\',
+                adapters: [' . implode(',', $this->_getScriptAdapters('highlight')) . ']
+            });
+        });';
+    }
+
+    private function _getScriptAdapters($namespace) {
         $media = array();
 
-        if($this->params->get('enable_twitter')) {
+        if($this->params->get($namespace . '_enable_twitter')) {
             $media[] = '{
                 logo: \'twitter\',
                 url: \'http://twitter.com/share\',
@@ -76,7 +92,7 @@ class PlgContentTw_share extends JPlugin
             }';
         }
 
-        if($this->params->get('enable_facebook')) {
+        if($this->params->get($namespace . '_enable_facebook')) {
             $media[] = '{
                 logo: \'facebook\',
                 url: \'https://www.facebook.com/sharer/sharer.php\',
@@ -89,7 +105,7 @@ class PlgContentTw_share extends JPlugin
             }';
         }
 
-        if($this->params->get('enable_pinterest')) {
+        if($this->params->get($namespace . '_enable_pinterest')) {
             $media[] = '{
                 logo: \'pinterest\',
                 url: \'https://www.pinterest.com/pin/create/button/\',
@@ -102,7 +118,7 @@ class PlgContentTw_share extends JPlugin
             }';
         }
 
-        if($this->params->get('enable_google_plus')) {
+        if($this->params->get($namespace . '_enable_google_plus')) {
             $media[] = '{
                 logo: \'google-plus\',
                 url: \'https://plus.google.com/share\',
@@ -115,18 +131,6 @@ class PlgContentTw_share extends JPlugin
             }';
         }
 
-        // Here we wil concat the needed strings.
-        return 'jQuery(function($) {
-            var config = {
-                baseClass: \'tw-share\',
-                position: \'' . $this->params->get('select_location') . '\',
-                highlightColor: \'' . $this->params->get('highlight_color') . '\',
-                adapters: [' . implode(',', $media) . ']
-            }
-
-            $(\'.tw-share-mark\').highlight(config);
-
-            $(\'' . $this->params->get('selectors') . '\').select(config);
-        });';
+        return $media;
     }
 }

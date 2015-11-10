@@ -138,17 +138,6 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field
-						type="list"
-						label="PLG_CONTENT_TW_SHARE_FIELD_POPUP_POSITION_LABEL"
-						name="highlight_location"
-						default="top">
-					<option>Cursor</option>
-					<option value="top">Top</option>
-					<option value="bottom">Bottom</option>
-					<option value="left">Left</option>
-					<option value="right">Right</option>
-				</field>
 			</fieldset>
 		</fields>
 	</config>
