@@ -45,7 +45,8 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-
+			</fieldset>
+			<fieldset name="Highlighting">
 				<field type="spacer"
 					   label="&lt;br/&gt;&lt;strong&gt;Service settings&lt;/strong&gt;&lt;hr/&gt;" />
 				<field
