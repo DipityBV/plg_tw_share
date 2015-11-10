@@ -10,8 +10,8 @@
     }
 
     $.extend(Social.prototype, {
-        shareText: function(adapter) {
-            var url = adapter.buildUrl.call(this, this.getSelection());
+        shareText: function(adapter, popup) {
+            var url = adapter.buildUrl.call(this, this.getSelection(popup));
 
             if (typeof url === 'object') {
                 var parts = [];
@@ -35,15 +35,19 @@
                 var button = $(document.createElement('span'));
                 button.addClass(this.config.baseClass + '__link');
                 button.addClass(this.config.baseClass + '__link--' + item.logo);
-                button.on('mousedown', this.shareText.bind(this, item));
+                button.on('mousedown', this.shareText.bind(this, item, popup));
 
                 popup.append(button);
             }.bind(this));
 
             return popup[0];
         },
-        getSelection: function() {
+        getSelection: function(popup) {
             var text = '';
+
+            if(popup && popup.data('share')) {
+                return popup.data('share');
+            }
 
             if (window.getSelection) {
                 text = window.getSelection().toString();
@@ -120,8 +124,11 @@
         var social = new Social($.extend({}, defaults, config));
 
         this.each(function() {
+            var popup = $(social.getPopup());
+            popup.data('share', $(this).text());
+
             $(this).off('mouseup, mousedown');
-            $(this).append(social.getPopup());
+            $(this).append(popup[0]);
         });
     };
 })(window.jQuery, window);
