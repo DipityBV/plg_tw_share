@@ -2,6 +2,8 @@
 
 Sharing plugin for Joomla. Share content by selecting a fragment of text.
 
+More info: http://teemrworks.github.io/plg_tw_share
+
 ## Sharing by selection
 When selecting any text fragment, a box with sharing options will pop up.
 
