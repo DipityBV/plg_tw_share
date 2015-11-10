@@ -103,6 +103,7 @@
 				<field
 						type="text"
 						name="selectors"
+						default="body"
 						label="PLG_CONTENT_TW_SHARE_FIELD_CONTAINER_LABEL"
 						description="PLG_CONTENT_TW_SHARE_FIELD_CONTAINER_DESC"/>
 				<field
