@@ -46,6 +46,13 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
+				<field
+						type="text"
+						label="PLG_CONTENT_TW_SHARE_FIELD_TWITTER_HANDLE_LABEL"
+						description="PLG_CONTENT_TW_SHARE_FIELD_TWITTER_HANDLE_DESC"
+						name="twitter_username"
+						default=""
+						class="btn-group"/>
 			</fieldset>
 			<fieldset name="Selection">
 				<field
@@ -88,8 +95,7 @@
 						type="text"
 						name="selectors"
 						label="PLG_CONTENT_TW_SHARE_FIELD_CONTAINER_LABEL"
-						description="PLG_CONTENT_TW_SHARE_FIELD_CONTAINER_DESC"
-						default="body"/>
+						description="PLG_CONTENT_TW_SHARE_FIELD_CONTAINER_DESC"/>
 				<field
 						type="list"
 						label="Selection popup location"
