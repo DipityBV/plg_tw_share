@@ -84,39 +84,41 @@
             }.bind(this));
 
             $(item).on('mouseup', function(event) {
-                var selection = social.getSelection(),
-                    top = (event.clientY <= coordinates.y) ? coordinates.y : event.pageY,
-                    center = (coordinates.x + event.pageX) / 2,
-                    css = {
-                        top: 0,
-                        left: 0,
-                        extra_class: ''
-                    };
+                setTimeout(function () {
+                    var selection = social.getSelection(),
+                        top = (event.clientY <= coordinates.y) ? coordinates.y : event.pageY,
+                        center = (coordinates.x + event.pageX) / 2,
+                        css = {
+                            top: 0,
+                            left: 0,
+                            extra_class: ''
+                        };
 
-                if(selection) {
-                    // get the position.
-                    switch(social.config.position) {
-                        case 'top':
-                            css.top = (top - 50);
-                            css.left = (center - ((social.config.adapters.length / 2) * 24));
-                            css.extra_class = 'bottom';
-                            break;
-                        default:
-                            css.top = event.pageY;
-                            css.left = event.pageX;
-                            break;
+                    if (selection) {
+                        // get the position.
+                        switch (social.config.position) {
+                            case 'top':
+                                css.top = (top - 50);
+                                css.left = (center - ((social.config.adapters.length / 2) * 24));
+                                css.extra_class = 'bottom';
+                                break;
+                            default:
+                                css.top = event.pageY;
+                                css.left = event.pageX;
+                                break;
+                        }
+
+                        var popup = $(social.getPopup());
+                        if (css.extra_class) {
+                            popup.addClass(social.config.baseClass + '--' + css.extra_class);
+                        }
+                        popup.css('top', css.top);
+                        popup.css('left', css.left);
+
+                        $(document.body).append(popup[0]);
                     }
-
-                    var popup = $(social.getPopup());
-                    if(css.extra_class) {
-                        popup.addClass(social.config.baseClass + '--' + css.extra_class);
-                    }
-                    popup.css('top', css.top);
-                    popup.css('left', css.left);
-
-                    $(document.body).append(popup[0]);
-                }
-            }.bind(this));
+                }.bind(this), 100);
+            }.bind(this))
         }.bind(this));
     };
 
