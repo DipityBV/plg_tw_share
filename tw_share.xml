@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.1" type="plugin" group="content" method="upgrade">
-	<name>Content - Teemr Works Social Sharing</name>
+<extension version="3.1" type="plugin" group="system" method="upgrade">
+	<name>System - Teemr Works Social Sharing</name>
 	<author>Teemr Works</author>
 	<creationDate>21 October 2015</creationDate>
 	<copyright>Copyright (C) 2015 Teemr Works. All rights reserved.</copyright>
@@ -8,15 +8,15 @@
 	<authorEmail>jasper@teemr.com</authorEmail>
 	<authorUrl>teemr.works</authorUrl>
 	<version>0.0.1</version>
-	<description>PLG_CONTENT_TW_SHARE_XML_DESCRIPTION</description>
+	<description>PLG_SYSTEM_TW_SHARE_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="tw_share">tw_share.php</filename>
 		<folder>media</folder>
 		<folder>language</folder>
 	</files>
 	<languages>
-		<language tag="en-GB">language/en-GB/en-GB.plg_content_tw_share.ini</language>
-		<language tag="en-GB">language/en-GB/en-GB.plg_content_tw_share.sys.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.PLG_SYSTEM_tw_share.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.PLG_SYSTEM_tw_share.sys.ini</language>
 	</languages>
 	<media folder="media" destination="plg_tw_share">
 		<folder>css</folder>
@@ -28,8 +28,8 @@
 			<fieldset name="basic">
 				<field
 						type="radio"
-						label="PLG_CONTENT_TW_SHARE_FIELD_ENABLE_SELECTION_SHARING_LABEL"
-						description="PLG_CONTENT_TW_SHARE_FIELD_ENABLE_SELECTION_SHARING_DESC"
+						label="PLG_SYSTEM_TW_SHARE_FIELD_ENABLE_SELECTION_SHARING_LABEL"
+						description="PLG_SYSTEM_TW_SHARE_FIELD_ENABLE_SELECTION_SHARING_DESC"
 						name="enable_selection"
 						default="1"
 						class="btn-group">
@@ -38,8 +38,8 @@
 				</field>
 				<field
 						type="radio"
-						label="PLG_CONTENT_TW_SHARE_FIELD_ENABLE_HIGHLIGHT_SHARING_LABEL"
-						description="PLG_CONTENT_TW_SHARE_FIELD_ENABLE_HIGHLIGHT_SHARING_DESC"
+						label="PLG_SYSTEM_TW_SHARE_FIELD_ENABLE_HIGHLIGHT_SHARING_LABEL"
+						description="PLG_SYSTEM_TW_SHARE_FIELD_ENABLE_HIGHLIGHT_SHARING_DESC"
 						name="enable_highlight"
 						default="1"
 						class="btn-group">
@@ -48,8 +48,8 @@
 				</field>
 				<field
 						type="text"
-						label="PLG_CONTENT_TW_SHARE_FIELD_TWITTER_HANDLE_LABEL"
-						description="PLG_CONTENT_TW_SHARE_FIELD_TWITTER_HANDLE_DESC"
+						label="PLG_SYSTEM_TW_SHARE_FIELD_TWITTER_HANDLE_LABEL"
+						description="PLG_SYSTEM_TW_SHARE_FIELD_TWITTER_HANDLE_DESC"
 						name="twitter_username"
 						default=""
 						class="btn-group"/>
@@ -57,7 +57,7 @@
 			<fieldset name="Selection">
 				<field
 						type="radio"
-						label="PLG_CONTENT_TW_SHARE_FIELD_ENABLE_TWITTER_LABEL"
+						label="PLG_SYSTEM_TW_SHARE_FIELD_ENABLE_TWITTER_LABEL"
 						name="selection_enable_twitter"
 						default="1"
 						class="btn-group">
@@ -66,7 +66,7 @@
 				</field>
 				<field
 						type="radio"
-						label="PLG_CONTENT_TW_SHARE_FIELD_ENABLE_FACEBOOK_LABEL"
+						label="PLG_SYSTEM_TW_SHARE_FIELD_ENABLE_FACEBOOK_LABEL"
 						name="selection_enable_facebook"
 						default="1"
 						class="btn-group">
@@ -75,7 +75,7 @@
 				</field>
 				<field
 						type="radio"
-						label="PLG_CONTENT_TW_SHARE_FIELD_ENABLE_GOOGLE_PLUS_LABEL"
+						label="PLG_SYSTEM_TW_SHARE_FIELD_ENABLE_GOOGLE_PLUS_LABEL"
 						name="selection_enable_google_plus"
 						default="1"
 						class="btn-group">
@@ -84,7 +84,7 @@
 				</field>
 				<field
 						type="radio"
-						label="PLG_CONTENT_TW_SHARE_FIELD_ENABLE_LINKEDIN_LABEL"
+						label="PLG_SYSTEM_TW_SHARE_FIELD_ENABLE_LINKEDIN_LABEL"
 						name="selection_enable_linkedin"
 						default="1"
 						class="btn-group">
@@ -93,7 +93,7 @@
 				</field>
 				<field
 						type="radio"
-						label="PLG_CONTENT_TW_SHARE_FIELD_ENABLE_PINTEREST_LABEL"
+						label="PLG_SYSTEM_TW_SHARE_FIELD_ENABLE_PINTEREST_LABEL"
 						name="selection_enable_pinterest"
 						default="1"
 						class="btn-group">
@@ -104,8 +104,8 @@
 						type="text"
 						name="selectors"
 						default="body"
-						label="PLG_CONTENT_TW_SHARE_FIELD_CONTAINER_LABEL"
-						description="PLG_CONTENT_TW_SHARE_FIELD_CONTAINER_DESC"/>
+						label="PLG_SYSTEM_TW_SHARE_FIELD_CONTAINER_LABEL"
+						description="PLG_SYSTEM_TW_SHARE_FIELD_CONTAINER_DESC"/>
 				<field
 						type="list"
 						label="Selection popup location"
@@ -121,7 +121,7 @@
 			<fieldset name="Highlight">
 				<field
 						type="radio"
-						label="PLG_CONTENT_TW_SHARE_FIELD_ENABLE_TWITTER_LABEL"
+						label="PLG_SYSTEM_TW_SHARE_FIELD_ENABLE_TWITTER_LABEL"
 						name="highlight_enable_twitter"
 						default="1"
 						class="btn-group">
@@ -130,7 +130,7 @@
 				</field>
 				<field
 						type="radio"
-						label="PLG_CONTENT_TW_SHARE_FIELD_ENABLE_FACEBOOK_LABEL"
+						label="PLG_SYSTEM_TW_SHARE_FIELD_ENABLE_FACEBOOK_LABEL"
 						name="highlight_enable_facebook"
 						default="1"
 						class="btn-group">
@@ -139,7 +139,7 @@
 				</field>
 				<field
 						type="radio"
-						label="PLG_CONTENT_TW_SHARE_FIELD_ENABLE_GOOGLE_PLUS_LABEL"
+						label="PLG_SYSTEM_TW_SHARE_FIELD_ENABLE_GOOGLE_PLUS_LABEL"
 						name="highlight_enable_google_plus"
 						default="1"
 						class="btn-group">
@@ -148,7 +148,7 @@
 				</field>
 				<field
 						type="radio"
-						label="PLG_CONTENT_TW_SHARE_FIELD_ENABLE_LINKEDIN_LABEL"
+						label="PLG_SYSTEM_TW_SHARE_FIELD_ENABLE_LINKEDIN_LABEL"
 						name="highlight_enable_linkedin"
 						default="1"
 						class="btn-group">
@@ -157,7 +157,7 @@
 				</field>
 				<field
 						type="radio"
-						label="PLG_CONTENT_TW_SHARE_FIELD_ENABLE_PINTEREST_LABEL"
+						label="PLG_SYSTEM_TW_SHARE_FIELD_ENABLE_PINTEREST_LABEL"
 						name="highlight_enable_pinterest"
 						default="1"
 						class="btn-group">

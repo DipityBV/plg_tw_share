@@ -1,46 +1,39 @@
 <?php
 
-class PlgContentTw_share extends JPlugin
+class PlgSystemTw_share extends JPlugin
 {
-    private static $_loaded = false;
-    protected $_row;
-
-    public function onContentBeforeDisplay($context, &$row, &$params, $page = 0)
-    {
-        // Here we need to add the stuff to our html.
+    public function onBeforeRender() {
         $app = JFactory::getApplication();
+        $document = $app->getDocument();
 
-        if($app->isSite() && !self::$_loaded) {
-
-            // Make the content available to the adapters
-            $this->_row = $row;
-
-            $this->_addHighlight($row);
-
-            // Load jQuery
+        if($app->isSite()) {
             JHtml::_('jquery.framework');
 
-            $document = $app->getDocument();
             $document->addStylesheet($this->_getStyles());
-            $document->addScript(JUri::base() . '/media/plg_tw_share/js/tw_share.js');
+            $document->addScript(JUri::base() . 'media/plg_tw_share/js/tw_share.js');
             $document->addScriptDeclaration($this->_getScript());
-
-            self::$_loaded = true;
         }
     }
 
-    protected function _addHighlight(&$row)
+    public function onAfterRender()
     {
-        $row->text = preg_replace('/{share}(.*?){\/share}/', '<span class="tw-share-mark">$1</span>', $row->text);
-        $row->introtext = preg_replace('/{share}(.*?){\/share}/', '<span class="tw-share-mark">$1</span>', $row->introtext);
-        $row->fulltext = preg_replace('/{share}(.*?){\/share}/', '<span class="tw-share-mark">$1</span>', $row->fulltext);
+        $app = JFactory::getApplication();
+
+        if($app->isSite()) {
+            $this->_addHighlight($app);
+        }
+    }
+
+    protected function _addHighlight(&$app)
+    {
+        $app->setBody(preg_replace('/{share}(.*?){\/share}/', '<span class="tw-share-mark">$1</span>', $app->getBody()));
     }
 
     protected function  _getStyles()
     {
         $app = JFactory::getApplication();
 
-        $stylesheet = JUri::base() . '/media/plg_tw_share/css/tw_share.css';
+        $stylesheet = JUri::base() . 'media/plg_tw_share/css/tw_share.css';
 
         // Check for a stylesheet override in the active template
         if( JFile::exists( JPATH_THEMES . '/' . $app->getTemplate() . '/css/tw_share.css' )) {
@@ -123,8 +116,7 @@ class PlgContentTw_share extends JPlugin
 
             $config = JFactory::getConfig();
 
-            $site_title = $config->get( 'sitename' );
-            $title = isset( $this->_row->title ) ? $this->_row->title : "";
+            $title = $config->get( 'sitename' );
 
             $media[] = '{
                 logo: \'linkedin\',
@@ -133,9 +125,9 @@ class PlgContentTw_share extends JPlugin
                     return {
                         mini: true,
                         url: window.location.toString(),
-                        title: "'.$title.'",
+                        title: "' . $title . '",
                         summary: text,
-                        source: "'.$site_title.'"
+                        source: "' . $title . '"
                     };
                 }
             }';
